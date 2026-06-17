@@ -7,11 +7,11 @@ de referencia, los datasets de prueba y los diagramas relacionales para cada uni
 
 | Carpeta | Unidad | Contenido |
 |---|---|---|
-| `unidad-01-fundamentos-diseño-relacional/` | Fundamentos y diseño relacional | Esquema base, datos semilla, diagrama ER inicial |
-| `unidad-02-sql-basico/` | SQL básico | Scripts DML, consultas de referencia |
-| `unidad-03-sql-avanzado/` | SQL avanzado | JOINs, CTEs, funciones de ventana |
-| `unidad-04-logica-almacenada/` | Lógica almacenada | Procedimientos, funciones, triggers |
-| `unidad-05-transacciones-y-pruebas/` | Transacciones y pruebas | Scripts ACID, casos de prueba |
+| [`unidad-01-fundamentos-diseño-relacional`](unidad-01-fundamentos-diseño-relacional/) | Fundamentos y diseño relacional | Esquema base, datos semilla, diagrama ER inicial |
+| [`unidad-02-sql-basico`](unidad-02-sql-basico/) | SQL básico | Scripts DML, consultas de referencia |
+| [`unidad-03-sql-avanzado`](unidad-03-sql-avanzado/) | SQL avanzado | JOINs, CTEs, funciones de ventana |
+| [`unidad-04-logica-almacenada`](unidad-04-logica-almacenada/) | Lógica almacenada | Procedimientos, funciones, triggers |
+| [`unidad-05-transacciones-y-pruebas`](unidad-05-transacciones-y-pruebas/) | Transacciones y pruebas | Scripts ACID, casos de prueba |
 
 ## Cómo usar estos recursos
 
