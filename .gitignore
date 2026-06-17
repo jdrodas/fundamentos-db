@@ -216,3 +216,29 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Visual Studio
+.vs/
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+
+# Editores
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# SQL dumps y backups temporales
+*.dump
+*.bak
+*_backup.sql
+
+# Archivos de entorno local
+.env
+*.local
+
+# Carpetas de trabajo personal
+_drafts/
+_borrador/
