@@ -1,0 +1,64 @@
+-- =============================================================================
+-- Curso: Bases de Datos Relacionales
+-- Docente: Juan Dario Rodas - jdrodas@hotmail.com
+-- Unidad 5: Transacciones, concurrencia y pruebas
+-- Archivo: 04_unit_tests.sql
+-- Propósito: Casos de prueba unitaria que validan el comportamiento esperado
+--            de las operaciones de la base de datos bajo condiciones normales
+--            y de fallo controlado.
+-- Motor: PostgreSQL 16+
+-- Prerequisito: ejecutar 00_schema.sql y 01_seed.sql antes de este archivo.
+-- =============================================================================
+
+-- -----------------------------------------------------------------------------
+-- INSTRUCCIONES PARA COMPLETAR ESTE ARCHIVO
+-- -----------------------------------------------------------------------------
+-- Cada caso de prueba debe seguir la estructura:
+--   1. ARRANGE — preparar el estado inicial necesario para la prueba.
+--   2. ACT     — ejecutar la operación que se desea validar.
+--   3. ASSERT  — verificar que el resultado es el esperado.
+--   4. CLEANUP — revertir los cambios para no afectar otras pruebas.
+--
+-- Usa RAISE NOTICE para reportar el resultado de cada prueba.
+-- Cubre tanto escenarios de éxito como de fallo esperado.
+-- -----------------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------------
+-- PRUEBA 1: Verificar que una transacción exitosa persiste los cambios
+-- -----------------------------------------------------------------------------
+-- DO $$
+-- DECLARE
+--     v_saldo_inicial  NUMERIC;
+--     v_saldo_final    NUMERIC;
+-- BEGIN
+--     -- ARRANGE
+--     SELECT saldo INTO v_saldo_inicial FROM cuenta WHERE id = 1;
+--
+--     -- ACT
+--     UPDATE cuenta SET saldo = saldo - 100 WHERE id = 1;
+--
+--     -- ASSERT
+--     SELECT saldo INTO v_saldo_final FROM cuenta WHERE id = 1;
+--     IF v_saldo_final = v_saldo_inicial - 100 THEN
+--         RAISE NOTICE 'PRUEBA 1 PASÓ: saldo actualizado correctamente.';
+--     ELSE
+--         RAISE NOTICE 'PRUEBA 1 FALLÓ: esperado %, obtenido %.',
+--                      v_saldo_inicial - 100, v_saldo_final;
+--     END IF;
+--
+--     -- CLEANUP
+--     UPDATE cuenta SET saldo = v_saldo_inicial WHERE id = 1;
+-- END;
+-- $$;
+
+
+-- -----------------------------------------------------------------------------
+-- PRUEBA 2: Verificar que un ROLLBACK no persiste cambios
+-- -----------------------------------------------------------------------------
+-- (completar siguiendo la estructura ARRANGE / ACT / ASSERT / CLEANUP)
+
+
+-- -----------------------------------------------------------------------------
+-- PRUEBA 3: Verificar que una restricción CHECK rechaza valores inválidos
+-- -----------------------------------------------------------------------------
+-- (completar siguiendo la estructura ARRANGE / ACT / ASSERT / CLEANUP)

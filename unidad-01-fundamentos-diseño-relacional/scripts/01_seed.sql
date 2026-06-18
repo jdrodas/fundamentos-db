@@ -1,0 +1,25 @@
+-- =============================================================================
+-- Curso: Bases de Datos Relacionales
+-- Docente: Juan Dario Rodas - jdrodas@hotmail.com
+-- Unidad 1: Fundamentos y diseño de bases de datos relacionales
+-- Archivo: 01_seed.sql
+-- Propósito: Inserción de datos de prueba que validan las relaciones y
+--            restricciones definidas en 00_schema.sql.
+-- Motor: PostgreSQL 16+
+-- Prerequisito: ejecutar 00_schema.sql antes de este archivo.
+-- =============================================================================
+
+-- -----------------------------------------------------------------------------
+-- INSTRUCCIONES PARA COMPLETAR ESTE ARCHIVO
+-- -----------------------------------------------------------------------------
+-- 1. Inserta al menos 5 registros por tabla para cubrir casos representativos.
+-- 2. Respeta el orden de inserción según dependencias entre tablas
+--    (primero tablas padre, luego tablas hijo).
+-- 3. Incluye casos que ejerciten claves foráneas y restricciones NOT NULL.
+-- 4. Usa valores representativos del dominio de problema de la cohorte.
+-- -----------------------------------------------------------------------------
+
+-- Ejemplo de estructura esperada (reemplazar con datos reales):
+-- INSERT INTO nombre_entidad (nombre, descripcion, creado_en) VALUES
+--     ('Ejemplo 1', 'Descripción del registro 1', NOW()),
+--     ('Ejemplo 2', 'Descripción del registro 2', NOW());

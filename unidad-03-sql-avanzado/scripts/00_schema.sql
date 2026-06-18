@@ -1,0 +1,30 @@
+-- =============================================================================
+-- Curso: Bases de Datos Relacionales
+-- Docente: Juan Dario Rodas - jdrodas@hotmail.com
+-- Unidad 3: SQL avanzado
+-- Archivo: 00_schema.sql
+-- Propósito: Enriquecimiento del modelo relacional acumulado incorporando
+--            nuevas entidades y relaciones que habiliten consultas con
+--            múltiples JOINs, subconsultas y funciones de ventana.
+-- Motor: PostgreSQL 16+
+-- Prerequisito: ejecutar todos los scripts de unit-01 y unit-02 antes de este.
+-- =============================================================================
+
+-- -----------------------------------------------------------------------------
+-- INSTRUCCIONES PARA COMPLETAR ESTE ARCHIVO
+-- -----------------------------------------------------------------------------
+-- 1. Define únicamente las tablas NUEVAS que enriquecen el modelo acumulado.
+-- 2. Las relaciones deben justificar el uso de múltiples JOINs.
+-- 3. Evidencia consolidación y madurez en las decisiones de diseño respecto
+--    a entregas anteriores (nomenclatura, normalización, restricciones).
+-- 4. Incluye comentario por tabla explicando qué patrón de consulta habilita.
+-- -----------------------------------------------------------------------------
+
+-- Ejemplo de estructura esperada (reemplazar con el modelo real):
+-- CREATE TABLE entidad_relacionada (
+--     id               SERIAL          PRIMARY KEY,
+--     tabla_a_id       INTEGER         NOT NULL REFERENCES tabla_a(id),
+--     tabla_b_id       INTEGER         NOT NULL REFERENCES tabla_b(id),
+--     cantidad         NUMERIC(10,2)   NOT NULL,
+--     registrado_en    TIMESTAMP       NOT NULL DEFAULT NOW()
+-- );

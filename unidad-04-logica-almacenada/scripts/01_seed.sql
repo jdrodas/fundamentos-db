@@ -1,0 +1,27 @@
+-- =============================================================================
+-- Curso: Bases de Datos Relacionales
+-- Docente: Juan Dario Rodas - jdrodas@hotmail.com
+-- Unidad 4: Lógica almacenada
+-- Archivo: 01_seed.sql
+-- Propósito: Inserción de datos de prueba base que serán manipulados por
+--            los procedimientos almacenados y triggers de la unidad.
+-- Motor: PostgreSQL 16+
+-- Prerequisito: ejecutar 00_schema.sql de esta unidad antes de este archivo.
+-- =============================================================================
+
+-- -----------------------------------------------------------------------------
+-- INSTRUCCIONES PARA COMPLETAR ESTE ARCHIVO
+-- -----------------------------------------------------------------------------
+-- 1. Inserta datos base suficientes para que procedimientos y triggers
+--    puedan ejecutarse sobre registros reales.
+-- 2. No es necesario poblar las tablas de auditoría manualmente; los triggers
+--    se encargarán de hacerlo automáticamente.
+-- 3. Incluye datos que cubran los distintos escenarios que los procedimientos
+--    deberán manejar (casos normales y casos de error).
+-- -----------------------------------------------------------------------------
+
+-- Ejemplo de estructura esperada (reemplazar con datos reales):
+-- INSERT INTO pedido (cliente_id, total, estado, creado_en) VALUES
+--     (1, 500.00, 'pendiente',  '2024-03-01 10:00:00'),
+--     (2, 150.75, 'completado', '2024-03-05 14:30:00'),
+--     (1,   0.00, 'cancelado',  '2024-03-10 09:00:00');
