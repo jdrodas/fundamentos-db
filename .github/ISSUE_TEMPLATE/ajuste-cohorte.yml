@@ -1,0 +1,68 @@
+name: Ajuste de contenido por cohorte
+description: Registra una modificación a scripts, guías o recursos motivada por el inicio de una nueva cohorte.
+title: "[Cohorte] "
+labels: ["ajuste-cohorte"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Usa este formulario para documentar cambios realizados al material del curso
+        al iniciar una nueva cohorte. Esto permite mantener un historial de evolución
+        del repositorio y facilitar futuras revisiones.
+
+  - type: input
+    id: cohorte
+    attributes:
+      label: Identificador de la cohorte
+      description: Ej. 202510, 202520, 202610
+      placeholder: "202620"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: unidad
+    attributes:
+      label: Unidad afectada
+      options:
+        - Unidad 1 — Fundamentos y diseño relacional
+        - Unidad 2 — SQL básico
+        - Unidad 3 — SQL avanzado
+        - Unidad 4 — Lógica almacenada
+        - Unidad 5 — Transacciones y pruebas
+        - Varias unidades
+    validations:
+      required: true
+
+  - type: input
+    id: archivo
+    attributes:
+      label: Archivo(s) modificado(s)
+      description: Nombre del archivo o archivos afectados
+      placeholder: "unit-02-sql-basico/scripts/02_queries.sql"
+    validations:
+      required: true
+
+  - type: textarea
+    id: descripcion
+    attributes:
+      label: Descripción del cambio
+      description: ¿Qué se modificó y por qué?
+      placeholder: "Se actualizó el dominio de problema de gestión de biblioteca a gestión de eventos..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: impacto
+    attributes:
+      label: Impacto en actividades
+      description: ¿Alguna actividad evaluativa se ve afectada por este cambio?
+      placeholder: "La Actividad 2 requiere ajustar las consultas de agrupamiento al nuevo dominio."
+
+  - type: checkboxes
+    id: verificacion
+    attributes:
+      label: Lista de verificación
+      options:
+        - label: Los scripts modificados ejecutan sin errores en PostgreSQL 16+
+        - label: El README de la unidad fue actualizado si aplica
+        - label: Los datos de prueba son coherentes con el nuevo contenido

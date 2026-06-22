@@ -1,0 +1,78 @@
+name: Reporte de error en script SQL
+description: Registra un error encontrado en alguno de los scripts SQL del repositorio.
+title: "[Error SQL] "
+labels: ["error-script"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Usa este formulario para reportar errores encontrados en los scripts SQL
+        antes de que los estudiantes los utilicen. Incluye el mensaje de error exacto
+        y los pasos para reproducirlo.
+
+  - type: dropdown
+    id: unidad
+    attributes:
+      label: Unidad donde se encontró el error
+      options:
+        - Unidad 1 — Fundamentos y diseño relacional
+        - Unidad 2 — SQL básico
+        - Unidad 3 — SQL avanzado
+        - Unidad 4 — Lógica almacenada
+        - Unidad 5 — Transacciones y pruebas
+    validations:
+      required: true
+
+  - type: input
+    id: archivo
+    attributes:
+      label: Archivo con el error
+      description: Ruta completa del archivo afectado
+      placeholder: "unidad-03-sql-avanzado/scripts/04_ctes.sql"
+    validations:
+      required: true
+
+  - type: input
+    id: linea
+    attributes:
+      label: Línea aproximada del error
+      placeholder: "45"
+
+  - type: textarea
+    id: mensaje_error
+    attributes:
+      label: Mensaje de error de PostgreSQL
+      description: Pega aquí el error exacto que retorna el motor
+      render: shell
+      placeholder: |
+        ERROR:  syntax error at or near "WITH"
+        LINE 45: WITH resumen AS (
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduccion
+    attributes:
+      label: Pasos para reproducir el error
+      description: Describe el orden de ejecución que genera el error
+      placeholder: |
+        1. Ejecutar 00_schema.sql
+        2. Ejecutar 01_seed.sql
+        3. Ejecutar 04_ctes.sql — falla en la línea 45
+    validations:
+      required: true
+
+  - type: textarea
+    id: entorno
+    attributes:
+      label: Entorno
+      description: Versión de PostgreSQL y sistema operativo
+      placeholder: |
+        PostgreSQL 16.2
+        macOS 14.4 / Windows 11 / Ubuntu 24.04
+
+  - type: textarea
+    id: solucion_propuesta
+    attributes:
+      label: Solución propuesta (opcional)
+      description: Si ya identificaste la causa y una posible corrección, descríbela aquí
