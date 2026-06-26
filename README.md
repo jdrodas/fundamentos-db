@@ -22,7 +22,7 @@ fundamentos-db/
 │       │   ├── README.md
 │       │   ├── DESCRIPCION_MODELO.md
 │       │   ├── diagramas/
-│       │   │   └── modelo-er.svg
+│       │   │   └── <nombre-dominio>_diagrama_relacional_unidad1.jpg
 │       │   └── scripts/
 │       │       ├── 00_schema.sql
 │       │       └── 01_seed.sql

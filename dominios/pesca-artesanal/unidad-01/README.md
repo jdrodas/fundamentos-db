@@ -50,9 +50,9 @@ prácticas de estructuración.
 |---------|-------------|
 | [README.md](README.md) |  Este archivo |
 | [MODELO_RELACIONAL.md](MODELO_RELACIONAL.md) |  descripción del dominio del problema |
-| [modelo-er.svg](diagramas/modelo-er.svg) |  diagrama relacional de referencia |
-| [00_schema.sql](scripts/00_schema.sql) |  script de creación de tablas y restricciones |
-| [01_seed.sql](scripts/01_seed.sql) |  datos de prueba |
+| [pesca_artesanal_diagrama_relacional_unidad1.jpg](diagramas/pesca_artesanal_diagrama_relacional_unidad1.jpg) |  diagrama relacional de la unidad |
+| [00_schema_postgreSQL.sql](scripts/00_schema_postgreSQL.sql) |  script de creación de tablas y restricciones |
+| [01_seed_postgreSQL.sql](scripts/01_seed_postgreSQL.sql) |  datos de prueba |
 
 
 ### Glosario rápido
