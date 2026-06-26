@@ -1,30 +1,58 @@
-# Fundamentos de Bases de Datos Relacionales — Recursos del Curso
+# Fundamentos de Bases de Datos Relacionales   
+# Recursos del Curso
 
-Repositorio de recursos de apoyo para el curso. Aquí encontrarás los scripts SQL
-de referencia, los datasets de prueba y los diagramas relacionales para cada unidad.
+Repositorio de recursos de apoyo para el curso. Contiene los materiales de cada dominio de problema trabajado a lo largo de las
+cohortes del curso: modelos relacionales, scripts SQL y diagramas ER organizados
+por unidad y con evolución progresiva del esquema.
+
+
+
+---
 
 ## Estructura del repositorio
 
+Cada dominio crece unidad a unidad. El modelo de la unidad anterior se extiende
+en la siguiente, acumulando entidades y complejidad de forma progresiva.
+
+```
+fundamentos-db/
+├── dominios/
+│   └── <nombre-dominio>/
+│       ├── unidad-01/
+│       │   ├── README.md
+│       │   ├── DESCRIPCION_MODELO.md
+│       │   ├── diagramas/
+│       │   │   └── modelo-er.svg
+│       │   └── scripts/
+│       │       ├── 00_schema.sql
+│       │       └── 01_seed.sql
+│       ├── unidad-02/
+│       ├── unidad-03/
+│       ├── unidad-04/
+│       └── unidad-05/
+└── README.md
+```
+
+---
+
+## Estructura de unidades del curso
+
+Cada unidad contiene la descripción de competencias, propósitos de aprendizaje y criterios de evaluación que se esperan lograr con su ejecución. Ubica el respectivo archivo **`README.md`** para más detalles.   
+
+
 | Carpeta | Unidad | Contenido |
 |---|---|---|
-| [`unidad-01-fundamentos-diseño-relacional`](unidad-01-fundamentos-diseño-relacional/) | Fundamentos y diseño relacional | Esquema base, datos semilla, diagrama ER inicial |
-| [`unidad-02-sql-basico`](unidad-02-sql-basico/) | SQL básico | Scripts DML, consultas de referencia |
-| [`unidad-03-sql-avanzado`](unidad-03-sql-avanzado/) | SQL avanzado | JOINs, CTEs, funciones de ventana |
-| [`unidad-04-logica-almacenada`](unidad-04-logica-almacenada/) | Lógica almacenada | Procedimientos, funciones, triggers |
-| [`unidad-05-transacciones-y-pruebas`](unidad-05-transacciones-y-pruebas/) | Transacciones y pruebas | Scripts ACID, casos de prueba |
+| unidad 1 | Fundamentos y diseño relacional | Esquema base, datos semilla, diagrama ER inicial |
+| unidad 2 | SQL básico | Scripts DML, consultas de referencia |
+| unidad 3 | SQL avanzado | JOINs, CTEs, funciones de ventana |
+| unidad 4 | Lógica almacenada | Procedimientos, funciones, triggers |
+| unidad 5 | Transacciones y pruebas | Scripts ACID, casos de prueba |
 
-## Cómo usar estos recursos
 
-1. Clona el repositorio o descarga la carpeta de la unidad que estás trabajando.
-2. Cada unidad tiene su propio `README.md` con los objetivos y criterios de evaluación.
-3. Los scripts están numerados en orden de ejecución: `00_schema.sql` primero,
-   luego `01_seed.sql`, luego las consultas.
+## Dominios
 
-## Motor de base de datos
+| Dominio | Período | Estado |
+|---|---|---|
+| [Pesca artesanal](dominios/pesca-artesanal/) | 2026-20 | En curso |
 
-Los scripts están escritos para **PostgreSQL 15+**. Si usas otro motor, revisa
-las notas de compatibilidad en el README de cada unidad.
-
-## Licencia
-
-MIT — puedes usar, adaptar y distribuir libremente con atribución.
+---

@@ -31,7 +31,7 @@ prácticas de estructuración.
 ### Criterios de evaluación
 
 | Componente | Criterio |
-|---|---|
+|------------|----------|
 | Diagrama relacional | Refleja correctamente entidades, atributos, claves primarias, claves foráneas y relaciones. Las tablas cumplen al menos con la 3FN. Las decisiones de diseño están justificadas con base en los conceptos estudiados. |
 | Script SQL | Ejecuta sin errores y crea la estructura definida en el diagrama. Usa tipos de datos apropiados (énfasis en `varchar` y `timestamp`). Las restricciones (`PRIMARY KEY`, `FOREIGN KEY`, `NOT NULL`) están correctamente definidas. Se incluyen datos de prueba que validan las relaciones. |
 
@@ -44,19 +44,15 @@ prácticas de estructuración.
    y criterios para desnormalizar.
 
 
-### Recursos de esta carpeta
+### Recursos de esta carpeta - unidad 1
 
-```
-unit-01-fundamentos-diseno-relacional/
-├── README.md          ← este archivo
-├── diagrams/
-│   └── modelo-er.svg  ← diagrama relacional de referencia
-├── scripts/
-│   ├── 00_schema.sql  ← creación de tablas y restricciones
-│   └── 01_seed.sql    ← datos de prueba
-└── data/
-
-```
+| Recurso | Descripción |
+|---------|-------------|
+| [README.md](README.md) |  Este archivo |
+| [MODELO_RELACIONAL.md](MODELO_RELACIONAL.md) |  descripción del dominio del problema |
+| [modelo-er.svg](diagramas/modelo-er.svg) |  diagrama relacional de referencia |
+| [00_schema.sql](scripts/00_schema.sql) |  script de creación de tablas y restricciones |
+| [01_seed.sql](scripts/01_seed.sql) |  datos de prueba |
 
 
 ### Glosario rápido
