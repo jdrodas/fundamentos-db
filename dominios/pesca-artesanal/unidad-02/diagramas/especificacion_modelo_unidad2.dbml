@@ -4,24 +4,18 @@
 
 // Proyecto: Pesca Artesanal
 // Version: Relacional - Modelado en DBML
+// Unidad 2: Fundamentos de SQL y operaciones básicas
 
 Table "cuencas" {
   "id" serial [pk, increment, note: 'identificador de la cuenca']
   "nombre" varchar(100) [not null, note: 'nombre de la cuenca.']
-
-  Indexes {
-    nombre [unique, name: "cuenca_nombre_uk"]
-  }
+  "descripcion" varchar(500) [note: 'descripción opcional de la cuenca.']
   Note: 'cuencas hidrográficas donde se registra actividad de pesca artesanal.'
 }
 
 Table "departamentos" {
   "id" serial [pk, increment, note: 'identificador del departamento']
   "nombre" varchar(100) [not null, note: 'nombre del departamento.']
-
-  Indexes {
-    nombre [unique, name: "departamento_nombre_uk"]
-  }
   Note: 'departamentos de colombia con presencia en el dominio pesquero.'
 }
 
@@ -30,10 +24,6 @@ Table "municipios" {
   "nombre" varchar(150) [not null, note: 'nombre del municipio.']
   "departamento_id" integer [not null, note: 'departamento al que pertenece el municipio.']
   "cuenca_id" integer [not null, note: 'cuenca principal asociada al municipio.']
-
-  Indexes {
-    (nombre, departamento_id) [unique, name: "municipio_nombre_departamento_uk"]
-  }
   Note: 'municipios con actividad de pesca artesanal registrada.'
 }
 
@@ -41,10 +31,6 @@ Table "especies" {
   "id" serial [pk, increment, note: 'identificador de la especie.']
   "nombre_comun" varchar(150) [not null, note: 'nombre común de la especie en colombia.']
   "nombre_cientifico" varchar(200) [not null, note: 'nombre científico en notación binomial. debe ser único.']
-
-  Indexes {
-    nombre_cientifico [unique, name: "specie_nombre_cientifico_uk"]
-  }
   Note: 'especies de peces presentes en la actividad pesquera artesanal.'
 }
 
@@ -52,14 +38,39 @@ Table "especies_cuencas" {
   "especie_id" integer [not null, note: 'referencia a la especie.']
   "cuenca_id" integer [not null, note: 'referencia a la cuenca.']
   "es_nativa" boolean [not null, default: true, note: 'indica si la especie es nativa de esa cuenca (true) o introducida (false).']
-
-  Indexes {
-    (especie_id, cuenca_id) [pk, name: "especie_cuenca_pk"]
-  }
   Note: 'distribución de especies por cuenca.'
+}
+
+Table "metodos_pesca" {
+  "id" serial [pk, increment, note: 'Identificador del método de pesca.']
+  "nombre" varchar(100) [not null, note: 'Nombre del método de pesca.']
+  Note: 'Catálogo de métodos o artes de pesca utilizados en la actividad artesanal.'
+}
+
+Table "pescadores" {
+  "id" serial [pk, increment, note: 'Identificador del pescador.']
+  "municipio_id" integer [not null, note: 'Municipio donde opera habitualmente el pescador.']
+  Note: 'Pescadores artesanales registrados en el dominio.'
+}
+
+Table "capturas" {
+  "id" serial [pk, increment, note: 'Identificador de la captura.']
+  "pescador_id" integer [not null, note: 'Pescador que realizó la captura.']
+  "municipio_id" integer [not null, note: 'Municipio donde ocurrió el evento de captura.']
+  "especie_id" integer [not null, note: 'Especie capturada.']
+  "metodo_id" integer [not null, note: 'Método de pesca utilizado.']
+  "cantidad_kg" numeric(8,2) [not null, note: 'Cantidad capturada en kilogramos. Debe ser mayor que cero.']
+  "fecha_hora" timestamp [not null, note: 'Fecha y hora del evento de captura.']
+  "observaciones" varchar(500) [note: 'Notas opcionales sobre la captura.']
+  Note: 'Tabla de hechos central. Registra cada evento de captura artesanal.'
 }
 
 Ref:"departamentos"."id" < "municipios"."departamento_id"
 Ref:"cuencas"."id" < "municipios"."cuenca_id"
 Ref:"especies"."id" < "especies_cuencas"."especie_id"
 Ref:"cuencas"."id" < "especies_cuencas"."cuenca_id"
+Ref:"municipios"."id" < "pescadores"."municipio_id"
+Ref:"pescadores"."id" < "capturas"."pescador_id"
+Ref:"municipios"."id" < "capturas"."municipio_id"
+Ref:"especies"."id" < "capturas"."especie_id"
+Ref:"metodos_pesca"."id" < "capturas"."metodo_id"

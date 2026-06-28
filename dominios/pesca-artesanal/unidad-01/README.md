@@ -49,7 +49,7 @@ prácticas de estructuración.
 | Recurso | Descripción |
 |---------|-------------|
 | [README.md](README.md) |  Este archivo |
-| [MODELO_RELACIONAL.md](MODELO_RELACIONAL.md) |  descripción del dominio del problema |
+| [DESCRIPCION_MODELO.md](DESCRIPCION_MODELO.md) |  descripción del dominio del problema |
 | [pesca_artesanal_diagrama_relacional_unidad1.jpg](diagramas/pesca_artesanal_diagrama_relacional_unidad1.jpg) |  diagrama relacional de la unidad |
 | [00_schema_postgreSQL.sql](scripts/00_schema_postgreSQL.sql) |  script de creación de tablas y restricciones |
 | [01_seed_postgreSQL.sql](scripts/01_seed_postgreSQL.sql) |  datos de prueba |

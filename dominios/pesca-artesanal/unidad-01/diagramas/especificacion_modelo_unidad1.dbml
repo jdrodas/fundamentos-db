@@ -1,0 +1,66 @@
+// Curso de Bases de datos relacionales
+// Scripts de clase - Junio 2026
+// Juan Dario Rodas - jdrodas@hotmail.com
+
+// Proyecto: Pesca Artesanal
+// Version: Relacional - Modelado en DBML
+// Unidad 1 — Fundamentos y diseño de bases de datos relacionales
+
+Table "cuencas" {
+  "id" serial [pk, increment, note: 'identificador de la cuenca']
+  "nombre" varchar(100) [not null, note: 'nombre de la cuenca.']
+
+  Indexes {
+    nombre [unique, name: "cuenca_nombre_uk"]
+  }
+  Note: 'cuencas hidrográficas donde se registra actividad de pesca artesanal.'
+}
+
+Table "departamentos" {
+  "id" serial [pk, increment, note: 'identificador del departamento']
+  "nombre" varchar(100) [not null, note: 'nombre del departamento.']
+
+  Indexes {
+    nombre [unique, name: "departamento_nombre_uk"]
+  }
+  Note: 'departamentos de colombia con presencia en el dominio pesquero.'
+}
+
+Table "municipios" {
+  "id" serial [pk, increment, note: 'identificador del municipio']
+  "nombre" varchar(150) [not null, note: 'nombre del municipio.']
+  "departamento_id" integer [not null, note: 'departamento al que pertenece el municipio.']
+  "cuenca_id" integer [not null, note: 'cuenca principal asociada al municipio.']
+
+  Indexes {
+    (nombre, departamento_id) [unique, name: "municipio_nombre_departamento_uk"]
+  }
+  Note: 'municipios con actividad de pesca artesanal registrada.'
+}
+
+Table "especies" {
+  "id" serial [pk, increment, note: 'identificador de la especie.']
+  "nombre_comun" varchar(150) [not null, note: 'nombre común de la especie en colombia.']
+  "nombre_cientifico" varchar(200) [not null, note: 'nombre científico en notación binomial. debe ser único.']
+
+  Indexes {
+    nombre_cientifico [unique, name: "specie_nombre_cientifico_uk"]
+  }
+  Note: 'especies de peces presentes en la actividad pesquera artesanal.'
+}
+
+Table "especies_cuencas" {
+  "especie_id" integer [not null, note: 'referencia a la especie.']
+  "cuenca_id" integer [not null, note: 'referencia a la cuenca.']
+  "es_nativa" boolean [not null, default: true, note: 'indica si la especie es nativa de esa cuenca (true) o introducida (false).']
+
+  Indexes {
+    (especie_id, cuenca_id) [pk, name: "especie_cuenca_pk"]
+  }
+  Note: 'distribución de especies por cuenca.'
+}
+
+Ref:"departamentos"."id" < "municipios"."departamento_id"
+Ref:"cuencas"."id" < "municipios"."cuenca_id"
+Ref:"especies"."id" < "especies_cuencas"."especie_id"
+Ref:"cuencas"."id" < "especies_cuencas"."cuenca_id"

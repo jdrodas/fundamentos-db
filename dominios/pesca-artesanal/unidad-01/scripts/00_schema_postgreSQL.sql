@@ -11,6 +11,12 @@
 -- Importante:
 -- Este script no es para ejecutar de manera autónoma. 
 -- El estudiante debe ejecutar cada grupo de instrucciones según la necesidad.
+
+-- Propósito:
+-- Este script inicia el proceso de implementación del modelo de datos:
+--      - Abasteciendo el contenedor de PostgreSQL en Docker
+--      - Creación de base de datos y usuarios
+--      - Creación del modelo de datos
 -- =============================================================================
 
 

@@ -50,19 +50,17 @@ precisión, integridad y eficiencia en la manipulación y consulta de datos.
    `MIN`), `GROUP BY` y `HAVING`, y funciones de cadena y fecha-hora.
 
 
-### Recursos de esta carpeta
+### Recursos de esta carpeta - unidad 1
 
-```
-unit-02-sql-basico/
-├── README.md              ← este archivo
-├── diagrams/
-│   └── modelo-er.svg      ← diagrama relacional extendido de referencia
-├── scripts/
-│   ├── 00_schema.sql      ← extensión del esquema con nuevas entidades
-│   ├── 01_seed.sql        ← datos de prueba representativos del dominio
-│   └── 02_queries.sql     ← consultas de referencia con GROUP BY y funciones
-└── data/
-```
+| Recurso | Descripción |
+|---------|-------------|
+| [README.md](README.md) |  Este archivo |
+| [DESCRIPCION_MODELO.md](DESCRIPCION_MODELO.md) |  descripción del dominio del problema |
+| [pesca_artesanal_diagrama_relacional_unidad2.jpg](diagramas/pesca_artesanal_diagrama_relacional_unidad2.jpg) |  diagrama relacional de la unidad |
+| [00_schema_postgreSQL.sql](scripts/00_schema_postgreSQL.sql) |  script de creación de tablas y restricciones |
+| [01_seed_postgreSQL.sql](scripts/01_seed_postgreSQL.sql) |  datos de prueba |
+| [02_queries_postgreSQL.sql](scripts/02_queries_postgreSQL.sql) |  consultas SQL |
+
 
 
 ### Glosario rápido
