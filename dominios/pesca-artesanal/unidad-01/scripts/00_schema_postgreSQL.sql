@@ -1,5 +1,5 @@
 -- =============================================================================
--- Scripts de clase - junio 2026 
+-- Scripts de clase - julio 2026 
 -- Curso de Fundamentos de Bases de Datos Relacionales
 -- Juan Dario Rodas - jdrodas@hotmail.com
 
@@ -7,6 +7,26 @@
 -- Motor de Base de datos: PostgreSQL 15 o superior
 
 -- Unidad 1 — Fundamentos y diseño de bases de datos relacionales
+-- Archivo: 00_schema_postgreSQL.sql
+
+-- Importante:
+-- Este script no es para ejecutar de manera autónoma. 
+-- El estudiante debe ejecutar cada grupo de instrucciones según la necesidad.
+
+-- Prerequisito: 
+-- ejecutar 00_schema_postgreSQL.sql y 01_seed_postgreSQL.sql de la unidad 3 antes de este script.
+-- ejecutar todos los scripts de las unidades 1 y 2.
+
+-- Propósito: 
+-- Ejemplos de referencia de cada tipo de JOIN aplicados al dominio
+-- de la cohorte, con la pregunta de negocio que cada uno responde.
+
+-- Principio de lectura de cada consulta:
+--   Cada bloque incluye la pregunta de negocio que responde, el tipo de JOIN
+--   utilizado, la justificación de por qué ese tipo es el adecuado para esa
+--   pregunta, y el resultado esperado en términos del dominio.
+
+-- =============================================================================
 
 -- Importante:
 -- Este script no es para ejecutar de manera autónoma. 
@@ -35,7 +55,8 @@ docker run --name pgsql-pesca -e POSTGRES_PASSWORD=unaClav3 -d -p 5432:5432 post
 -- Creación de base de datos y usuarios
 -- -----------------------------------------------------------------------------
 
--- Con usuario Postgres:
+-- Con usuario Postgres, desde el shell del contenedor
+psql -U postgres
 
 -- crear el esquema la base de datos
 create database pesca_db;

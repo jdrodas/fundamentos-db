@@ -50,25 +50,19 @@ entidades del modelo para responder preguntas de negocio complejas.
    cálculos móviles y acumulativos; manejo avanzado de `varchar` y `timestamp`
    en análisis temporal y textual.
 
+### Recursos de esta carpeta - unidad 3
 
-### Recursos de esta carpeta
-
-```
-unit-03-sql-avanzado/
-├── README.md                  ← este archivo
-├── diagrams/
-│   └── modelo-er.svg          ← diagrama relacional enriquecido de referencia
-├── scripts/
-│   ├── 00_schema.sql          ← extensión del esquema con nuevas relaciones
-│   ├── 01_seed.sql            ← datos de prueba representativos del dominio
-│   ├── 02_joins.sql           ← ejemplos de cada tipo de JOIN
-│   ├── 03_subqueries.sql      ← subconsultas simples y correlacionadas
-│   ├── 04_ctes.sql            ← CTEs simples y recursivas
-│   └── 05_window_functions.sql← funciones de ventana y análisis avanzado
-└── data/
-
-```
-
+| Recurso | Descripción |
+|---------|-------------|
+| [README.md](README.md) |  Este archivo |
+| [DESCRIPCION_MODELO.md](DESCRIPCION_MODELO.md) |  descripción del dominio del problema |
+| [pesca_artesanal_diagrama_relacional_unidad3.jpg](diagramas/pesca_artesanal_diagrama_relacional_unidad3.jpg) |  diagrama relacional de la unidad |
+| [00_schema_postgreSQL.sql](scripts/00_schema_postgreSQL.sql) |  script de creación de tablas y restricciones |
+| [01_seed_postgreSQL.sql](scripts/01_seed_postgreSQL.sql) |  datos de prueba |
+| [02_queries_postgreSQL.sql](scripts/02_queries_postgreSQL.sql) |  consultas SQL |
+| [03_subqueries_postgreSQL.sql](scripts/03_subqueries_postgreSQL.sql) |  subconsultas simples y correlacionadas |
+| [04_ctes_postgreSQL.sql](scripts/04_ctes_postgreSQL.sql) |  CTEs simples y recursivass |
+| [05_window_functions_postgreSQL.sql](scripts/05_window_functions_postgreSQL.sql) |  funciones de ventana y análisis avanzado |
 
 ### Glosario rápido
 

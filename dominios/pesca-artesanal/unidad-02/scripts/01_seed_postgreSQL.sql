@@ -1,5 +1,5 @@
 -- =============================================================================
--- Scripts de clase - junio 2026 
+-- Scripts de clase - julio 2026 
 -- Curso de Fundamentos de Bases de Datos Relacionales
 -- Juan Dario Rodas - jdrodas@hotmail.com
 
@@ -7,6 +7,7 @@
 -- Motor de Base de datos: PostgreSQL 15 o superior
 
 -- Unidad 2: Fundamentos de SQL y operaciones básicas
+-- Archivo: 01_seed_postgreSQL.sql
 
 -- Importante:
 -- Este script no es para ejecutar de manera autónoma. 

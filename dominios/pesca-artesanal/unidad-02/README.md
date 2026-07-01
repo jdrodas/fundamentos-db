@@ -50,7 +50,7 @@ precisión, integridad y eficiencia en la manipulación y consulta de datos.
    `MIN`), `GROUP BY` y `HAVING`, y funciones de cadena y fecha-hora.
 
 
-### Recursos de esta carpeta - unidad 1
+### Recursos de esta carpeta - unidad 2
 
 | Recurso | Descripción |
 |---------|-------------|

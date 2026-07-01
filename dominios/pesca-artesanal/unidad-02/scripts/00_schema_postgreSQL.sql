@@ -1,5 +1,5 @@
 -- =============================================================================
--- Scripts de clase - junio 2026 
+-- Scripts de clase - julio 2026 
 -- Curso de Fundamentos de Bases de Datos Relacionales
 -- Juan Dario Rodas - jdrodas@hotmail.com
 
@@ -7,6 +7,7 @@
 -- Motor de Base de datos: PostgreSQL 15 o superior
 
 -- Unidad 2 — SQL básico y operaciones de manipulación de datos
+-- Archivo: 00_schema_postgreSQL.sql
 
 -- Importante:
 -- Este script no es para ejecutar de manera autónoma. 
@@ -26,7 +27,7 @@
 
 
 -- -----------------------------------------------------------------------------
--- Creación de tablas nuevas en el  modelo de datos
+-- Creación de tablas nuevas en el modelo de datos
 -- -----------------------------------------------------------------------------
 
 -- 1. metodos_pesca
@@ -79,11 +80,11 @@ comment on column capturas.observaciones is 'Notas opcionales sobre la captura.'
 -- Índices de soporte para consultas frecuentes
 -- -----------------------------------------------------------------------------
 
-create index captura_especie_ix   on capturas (especie_id);
-create index captura_municipio_ix on capturas (municipio_id);
-create index captura_pescador_ix  on capturas (pescador_id);
-create index captura_fecha_hora_ix   on capturas (fecha_hora);
-create index captura_metodo_ix    on capturas (metodo_id);
+create index captura_especie_ix     on capturas (especie_id);
+create index captura_municipio_ix   on capturas (municipio_id);
+create index captura_pescador_ix    on capturas (pescador_id);
+create index captura_fecha_hora_ix  on capturas (fecha_hora);
+create index captura_metodo_ix      on capturas (metodo_id);
 
 
 -- -----------------------------------------------------------------------------
