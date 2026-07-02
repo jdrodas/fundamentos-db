@@ -21,8 +21,10 @@
 -- A diferencia de una subconsulta en FROM, una CTE se declara antes del
 -- SELECT principal y puede reutilizarse varias veces dentro de la misma
 -- consulta, lo que mejora la legibilidad de consultas con varios pasos.
+
 -- =============================================================================
 
+-- -----------------------------------------------------------------------------
 -- 1. CTEs simples
 
 -- Una CTE simple reemplaza una subconsulta en FROM con una sintaxis más

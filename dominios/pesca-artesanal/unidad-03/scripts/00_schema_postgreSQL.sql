@@ -29,8 +29,6 @@
 -- el paso de refactorización es irreversible en el contexto
 -- de este script. Ejecutar únicamente sobre una base de datos con los
 -- datos de las unidades anteriores correctamente cargados.
-
-
 -- =============================================================================
 
 -- -----------------------------------------------------------------------------

@@ -96,7 +96,7 @@ en una embarcación específica y puede incluir múltiples pescadores y capturas
 
 | Columna | Tipo | Restricciones | Descripción |
 |---|---|---|---|
-| `faena_id` | `serial` | `PRIMARY KEY` | Identificador surrogate autoincremental |
+| `id` | `serial` | `PRIMARY KEY` | Identificador surrogate autoincremental |
 | `embarcacion_id` | `integer` | `NOT NULL`, `FOREIGN KEY` | Embarcación utilizada |
 | `municipio_id` | `integer` | `NOT NULL`, `FOREIGN KEY` | Municipio de salida de la faena |
 | `fecha_salida` | `timestamp` | `NOT NULL` | Fecha y hora de inicio de la faena |
@@ -118,7 +118,7 @@ La clave primaria compuesta es `(faena_id, pescador_id)`.
 
 ## Decisiones de diseño
 
-### 1. Refactorización de captura: retiro de municipio_id
+### 1. Refactorización de captura; retiro de municipio_id
 
 En la Unidad 2 `capturas` almacenaba directamente `municipio_id` para registrar
 dónde ocurrió el evento. Con la introducción de `faenas`, el municipio es un
@@ -143,7 +143,7 @@ La tabla `faenas_pescadores` registra quiénes participaron en el viaje; `captur
 registra quién ejecutó cada acción específica. Son semánticas distintas y
 complementarias.
 
-### 3. Validación de capacidades — decisión diferida a Unidad 4
+### 3. Validación de capacidades diferida a Unidad 4
 
 `tipo_embarcacion` incluye `capacidad_personas` y `capacidad_carga_kg`. La
 validación de que una faena no supera estas capacidades (número de pescadores
@@ -205,23 +205,28 @@ y CTEs, que son los conceptos centrales de esta unidad.
 
 ---
 
-## Archivos del repositorio
+## Vistas
 
-```
-unidad-03/
-├── MODELO_RELACIONAL.md          ← este archivo
-├── diagrams/
-│   └── modelo-er.svg             ← diagrama relacional enriquecido
-└── scripts/
-    ├── 00_schema.sql             ← refactorización y nuevas entidades
-    ├── 01_seed.sql               ← datos de prueba
-    ├── 02_joins.sql              ← ejemplos de cada tipo de JOIN
-    ├── 03_subqueries.sql         ← subconsultas simples y correlacionadas
-    └── 04_ctes.sql               ← CTEs simples y recursivas
-```
+Como cierre de la unidad, las consultas más representativas construidas en los
+scripts anteriores se encapsulan como vistas (`CREATE VIEW`). Una vista es una
+consulta guardada bajo un nombre: no almacena datos propios, sino que ejecuta
+su definición cada vez que se consulta. Esto permite reutilizar lógica de JOIN,
+subconsultas y CTEs ya validada sin reescribirla en cada análisis nuevo.
+
+Nota de alcance: las vistas de esta unidad son vistas simples. Las vistas
+materializadas —que sí almacenan físicamente el resultado y requieren una
+estrategia de actualización— se abordan en la Unidad 5, junto con las demás
+consideraciones de rendimiento y producción del curso.
+
+### Vistas creadas
+
+| Vista  | Propósito |
+|---|---|
+| `v_faenas_detalle` | Faena con embarcación, tipo, municipio, departamento y cuenca en una sola consulta |
+| `v_productividad_pescador` | Total de capturas y kg por pescador, listo para análisis de ranking |
+| `v_ranking_especies_cuenca` | Posición de cada especie dentro de su cuenca según kg capturado |
 
 ---
-
 
 ## Glosario
 
@@ -232,3 +237,5 @@ unidad-03/
 | JOIN | Operación SQL que combina filas de dos o más tablas basándose en una condición de relación entre ellas |
 | Subconsulta correlacionada | Subconsulta que referencia columnas de la consulta exterior y se ejecuta una vez por cada fila procesada |
 | CTE | Common Table Expression: expresión de tabla temporal definida con WITH que existe únicamente durante la ejecución de la consulta que la contiene |
+| Función de ventana | Función SQL que realiza cálculos sobre un conjunto de filas relacionadas con la fila actual sin colapsar el resultado en un único valor. |
+| Vista | Consulta guardada bajo un nombre, que se ejecuta cada vez que se referencia. No almacena datos propios |

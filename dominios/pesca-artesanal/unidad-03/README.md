@@ -59,10 +59,11 @@ entidades del modelo para responder preguntas de negocio complejas.
 | [pesca_artesanal_diagrama_relacional_unidad3.jpg](diagramas/pesca_artesanal_diagrama_relacional_unidad3.jpg) |  diagrama relacional de la unidad |
 | [00_schema_postgreSQL.sql](scripts/00_schema_postgreSQL.sql) |  script de creación de tablas y restricciones |
 | [01_seed_postgreSQL.sql](scripts/01_seed_postgreSQL.sql) |  datos de prueba |
-| [02_queries_postgreSQL.sql](scripts/02_queries_postgreSQL.sql) |  consultas SQL |
+| [02_joins_postgreSQL.sql](scripts/02_joins_postgreSQL.sql) |  consultas SQL usando JOINS |
 | [03_subqueries_postgreSQL.sql](scripts/03_subqueries_postgreSQL.sql) |  subconsultas simples y correlacionadas |
 | [04_ctes_postgreSQL.sql](scripts/04_ctes_postgreSQL.sql) |  CTEs simples y recursivass |
 | [05_window_functions_postgreSQL.sql](scripts/05_window_functions_postgreSQL.sql) |  funciones de ventana y análisis avanzado |
+| [06_views_postgreSQL.sql](scripts/06_views_postgreSQL.sql) |  vistas que encapsulan consultas de referencia |
 
 ### Glosario rápido
 
@@ -73,3 +74,4 @@ entidades del modelo para responder preguntas de negocio complejas.
 | Subconsulta correlacionada | Subconsulta que referencia columnas de la consulta exterior y se ejecuta una vez por cada fila procesada. |
 | CTE (Common Table Expression) | Expresión de tabla temporal definida con `WITH` que existe únicamente durante la ejecución de la consulta que la contiene. |
 | Función de ventana | Función SQL que realiza cálculos sobre un conjunto de filas relacionadas con la fila actual sin colapsar el resultado en un único valor. |
+| Vista | Consulta guardada bajo un nombre, que se ejecuta cada vez que se referencia. No almacena datos propios |

@@ -18,6 +18,7 @@
 
 -- =============================================================================
 
+-- -----------------------------------------------------------------------------
 -- 1. Subconsultas en WHERE
 --
 -- Una subconsulta en WHERE filtra las filas del resultado principal según

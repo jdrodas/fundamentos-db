@@ -23,7 +23,6 @@
 -- durante la refactorización. El objetivo es tener faenas reales con
 -- múltiples pescadores y capturas variadas para ejercitar JOINs,
 -- subconsultas y CTEs en los scripts 02, 03 y 04.
-
 -- =============================================================================
 
 -- -----------------------------------------------------------------------------

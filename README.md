@@ -44,7 +44,7 @@ Cada unidad contiene la descripción de competencias, propósitos de aprendizaje
 |---|---|---|
 | unidad 1 | Fundamentos y diseño relacional | Esquema base, datos semilla, diagrama ER inicial |
 | unidad 2 | SQL básico | Scripts DML, consultas de referencia |
-| unidad 3 | SQL avanzado | JOINs, CTEs, funciones de ventana |
+| unidad 3 | SQL avanzado | JOINs, CTEs, funciones de ventana, vistas |
 | unidad 4 | Lógica almacenada | Procedimientos, funciones, triggers |
 | unidad 5 | Transacciones y pruebas | Scripts ACID, casos de prueba |
 

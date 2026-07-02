@@ -24,6 +24,8 @@
 -- se agrega como una columna adicional.
 
 -- =============================================================================
+
+-- -----------------------------------------------------------------------------
 -- 1. Ranking
 
 -- RANK(), DENSE_RANK() y ROW_NUMBER() asignan una posición a cada fila
