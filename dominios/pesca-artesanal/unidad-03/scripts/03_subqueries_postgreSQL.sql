@@ -251,7 +251,7 @@ from (
 order by por_metodo.promedio_kg desc;
 
 -- =============================================================================
--- 4. Subconsultas correlacionadas
+-- 3. Subconsultas correlacionadas
 --
 -- Una subconsulta correlacionada referencia una columna de la consulta
 -- exterior. A diferencia de las subconsultas no correlacionadas (que se
@@ -265,7 +265,7 @@ order by por_metodo.promedio_kg desc;
 -- =============================================================================
 
 -- -----------------------------------------------------------------------------
--- 4.1. Captura máxima de cada pescador en cada faena
+-- 3.1. Captura máxima de cada pescador en cada faena
 --
 -- Pregunta: ¿cuál fue la captura individual más grande que hizo cada
 -- pescador en cada faena en la que participó?
@@ -292,7 +292,7 @@ where c.cantidad_kg = (
 order by c.faena_id, c.pescador_id;
 
 -- -----------------------------------------------------------------------------
--- 4.2. Municipios cuya captura total supera a su propio departamento en promedio
+-- 3.2. Municipios cuya captura total supera a su propio departamento en promedio
 --
 -- Pregunta: ¿qué municipios producen más que el promedio de los demás
 -- municipios de su mismo departamento?
@@ -327,7 +327,7 @@ having sum(c.cantidad_kg) > (
 order by d.nombre, total_kg desc;
 
 -- -----------------------------------------------------------------------------
--- 4.3. Especies capturadas en TODAS las cuencas donde habitan
+-- 3.3. Especies capturadas en TODAS las cuencas donde habitan
 --
 -- Pregunta: ¿hay alguna especie que tenga capturas registradas en todas
 -- las cuencas donde su distribución está catalogada?
