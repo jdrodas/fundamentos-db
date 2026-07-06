@@ -437,7 +437,7 @@ select
     (select id from especies where nombre_comun = 'Pargo rojo')         as especie_id,
     (select id  from metodos_pesca where nombre = 'Buceo')              as metodo_id,
     9.10                                                                as cantidad_kg,
-    '2026-04-01 07:30:00'                                               as fecha_hora, 
+    '2026-04-01 07:30:00'                                               as fecha_hora 
 from faenas f
 where f.fecha_salida = '2026-04-01 04:45:00'
   and f.embarcacion_id = (select id from embarcaciones where matricula = 'TUM-001');  
@@ -565,6 +565,3 @@ join embarcaciones emb on emb.id = f.embarcacion_id
 join municipios   m   on m.id     = f.municipio_id
 where f.fecha_retorno is null
 order by f.fecha_salida;
-
-
-

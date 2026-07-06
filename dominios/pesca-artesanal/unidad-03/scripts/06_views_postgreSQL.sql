@@ -135,13 +135,20 @@ comment on view v_ranking_especies_cuenca is
 -- -----------------------------------------------------------------------------
 
 -- Faenas activas (en curso) con su contexto completo, sin repetir JOINs
-select * from v_faenas_detalle where fecha_retorno is null order by fecha_salida;
+select * 
+from v_faenas_detalle 
+where fecha_retorno is null 
+order by fecha_salida;
 
 -- Los 5 pescadores más productivos
-select * from v_productividad_pescador order by total_kg desc limit 5;
+select * 
+from v_productividad_pescador 
+order by total_kg desc limit 5;
 
 -- La especie líder de cada cuenca
-select cuenca, especie, total_kg from v_ranking_especies_cuenca where posicion_en_cuenca = 1;
+select cuenca, especie, total_kg 
+from v_ranking_especies_cuenca 
+where posicion_en_cuenca = 1;
 
 -- Combinar dos vistas: productividad de pescadores que operan en la cuenca
 -- cuya especie líder es el Corvina

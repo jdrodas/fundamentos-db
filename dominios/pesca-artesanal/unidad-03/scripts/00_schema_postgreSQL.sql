@@ -181,7 +181,9 @@ where e.municipio_id = c.municipio_id
 -- Verificar que todas las capturas tienen faena_id asignado antes de
 -- activar NOT NULL. Si este SELECT retorna valor mayor que cero, detener y revisar.
 
-select count(*) as capturas_sin_faena from capturas where faena_id is null;
+select count(*) as capturas_sin_faena 
+from capturas 
+where faena_id is null;
 
 alter table capturas
     alter column faena_id set not null;
