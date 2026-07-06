@@ -47,21 +47,16 @@ reglas de negocio, automatizar procesos y garantizar la integridad de los datos.
    `INSERT`, `UPDATE` y `DELETE`; escenarios de uso y consideraciones de rendimiento.
 
 
-### Recursos de esta carpeta
+### Recursos de esta carpeta - unidad 4
 
-```
-unit-04-logica-almacenada/
-├── README.md                      ← este archivo
-├── diagrams/
-│   └── modelo-er.svg              ← diagrama relacional de referencia
-├── scripts/
-│   ├── 00_schema.sql              ← modelo relacional de la unidad
-│   ├── 01_seed.sql                ← datos de prueba representativos del dominio
-│   ├── 02_stored_procedures.sql   ← procedimientos almacenados de referencia
-│   ├── 03_functions.sql           ← funciones escalares y de tabla
-│   └── 04_triggers.sql            ← triggers para INSERT, UPDATE y DELETE
-└── data/
-```
+| Recurso | Descripción |
+|---------|-------------|
+| [README.md](README.md) |  Este archivo |
+| [DESCRIPCION_MODELO.md](DESCRIPCION_MODELO.md) |  descripción del dominio del problema |
+| [pesca_artesanal_diagrama_relacional_unidad4.jpg](diagramas/pesca_artesanal_diagrama_relacional_unidad4.jpg) |  diagrama relacional de la unidad |
+| [00_schema_postgreSQL.sql](scripts/00_schema_postgreSQL.sql) |  script de creación de tablas y restricciones |
+| [01_seed_postgreSQL.sql](scripts/01_seed_postgreSQL.sql) |  datos de prueba |
+
 
 ### Glosario rápido
 
