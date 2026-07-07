@@ -1,0 +1,192 @@
+// Curso de Bases de datos relacionales
+// Scripts de clase - julio 2026 
+// Juan Dario Rodas - jdrodas@hotmail.com
+
+// Proyecto: Pesca Artesanal
+// Version: Relacional - Modelado en DBML
+// Unidad 4: Lógica almacenada
+
+Table "cuencas" {
+  "id" serial [pk, increment, note: 'identificador de la cuenca']
+  "nombre" varchar(100) [not null, note: 'nombre de la cuenca.']
+  "descripcion" varchar(500) [note: 'descripción opcional de la cuenca.']
+
+  Indexes {
+    nombre [unique, name: "cuenca_nombre_uk"]
+  }
+  Note: 'cuencas hidrográficas donde se registra actividad de pesca artesanal.'
+}
+
+Table "departamentos" {
+  "id" serial [pk, increment, note: 'identificador del departamento']
+  "nombre" varchar(100) [not null, note: 'nombre del departamento.']
+
+  Indexes {
+    nombre [unique, name: "departamento_nombre_uk"]
+  }
+  Note: 'departamentos de colombia con presencia en el dominio pesquero.'
+}
+
+Table "municipios" {
+  "id" serial [pk, increment, note: 'identificador del municipio']
+  "nombre" varchar(150) [not null, note: 'nombre del municipio.']
+  "cuenca_id" integer [not null, note: 'cuenca principal asociada al municipio.']
+  "departamento_id" integer [not null, note: 'departamento al que pertenece el municipio.']
+  
+
+  Indexes {
+    (nombre, departamento_id) [unique, name: "municipio_nombre_departamento_uk"]
+  }
+  Note: 'municipios con actividad de pesca artesanal registrada.'
+}
+
+Table "especies" {
+  "id" serial [pk, increment, note: 'identificador de la especie.']
+  "nombre_comun" varchar(150) [not null, note: 'nombre común de la especie en colombia.']
+  "nombre_cientifico" varchar(200) [not null, note: 'nombre científico en notación binomial. debe ser único.']
+
+  Indexes {
+    nombre_cientifico [unique, name: "especie_nombre_cientifico_uk"]
+  }
+  Note: 'especies de peces presentes en la actividad pesquera artesanal.'
+}
+
+Table "especies_cuencas" {
+  "especie_id" integer [not null, note: 'referencia a la especie.']  
+  "cuenca_id" integer [not null, note: 'referencia a la cuenca.']
+  "es_nativa" boolean [not null, default: true, note: 'indica si la especie es nativa de esa cuenca (true) o introducida (false).']
+
+  Indexes {
+    (especie_id, cuenca_id) [pk, name: "especies_cuencas_pk"]
+  }
+  Note: 'distribución de especies por cuenca.'
+}
+
+Table "metodos_pesca" {
+  "id" serial [pk, increment, note: 'Identificador del método de pesca.']
+  "nombre" varchar(100) [not null, note: 'Nombre del método de pesca.']
+
+  Indexes {
+    nombre [unique, name: "metodo_pesca_nombre_uk"]
+  }
+  Note: 'Catálogo de métodos o artes de pesca utilizados en la actividad artesanal.'
+}
+
+Table "pescadores" {
+  "id" serial [pk, increment, note: 'Identificador del pescador.']
+  "municipio_id" integer [not null, note: 'Municipio donde opera habitualmente el pescador.']
+  Note: 'Pescadores artesanales registrados en el dominio.'
+}
+
+Table "capturas" {
+  "id" serial [pk, increment, note: 'Identificador de la captura.']
+  "metodo_id" integer [not null, note: 'Método de pesca utilizado.']
+  "faena_id" integer [not null, note: 'Faena en la que se realizó la captura.']  
+  "pescador_id" integer [not null, note: 'Pescador que realizó la captura.']
+  "especie_id" integer [not null, note: 'Especie capturada.']  
+  "cantidad_kg" numeric(8,2) [not null, note: 'Cantidad capturada en kilogramos. Debe ser mayor que cero.']
+  "fecha_hora" timestamp [not null, note: 'Fecha y hora del evento de captura.']
+  "observaciones" varchar(500) [note: 'Notas opcionales sobre la captura.']
+
+  Checks {
+    `cantidad_kg > 0` [name: 'captura_cantidad_kg_ck']
+  }
+  Note: 'Tabla de hechos central. Registra cada evento de captura artesanal.'
+}
+
+Table "tipos_embarcacion" {
+  "id" serial [pk, increment]
+  "nombre" varchar(100) [not null, note: 'Nombre del tipo de embarcación.']
+  "impulsion" varchar(20) [not null, note: 'Forma de impulsión: motor o remo.']
+  "capacidad_personas" integer [not null, note: 'Número máximo de personas a bordo.']
+  "capacidad_carga_kg" numeric(8,2) [not null, note: 'Capacidad máxima de carga en kilogramos.']
+
+  Checks {
+    `impulsion in ('motor', 'remo')` [name: 'tipo_embarcacion_impulsion_ck']
+    `capacidad_personas > 0` [name: 'tipo_embarcacion_capacidad_personas_ck']
+    `capacidad_carga_kg > 0` [name: 'tipo_embarcacion_capacidad_carga_ck']
+  }
+
+  Indexes {
+    nombre [unique, name: "tipo_embarcacion_nombre_uk"]
+  }
+  Note: 'Catálogo de tipos de embarcación con sus características operativas.'
+}
+
+Table "embarcaciones" {
+  "id" serial [pk, increment, note: 'Identificador de la embarcación']
+  "tipo_embarcacion_id" integer [not null, note: 'Tipo de embarcación con sus características operativas.']  
+  "matricula" varchar(50) [not null, note: 'Matrícula oficial de la embarcación.']
+  "municipio_id" integer [not null, note: 'Municipio donde opera habitualmente la embarcación (puerto base).']
+  Indexes {
+    matricula [unique, name: "uq_embarcacion_matricula"]
+  }
+  Note: 'Embarcaciones individuales registradas en el dominio pesquero.'
+}
+
+Table "faenas" {  
+  "embarcacion_id" integer [not null, note: 'Embarcación utilizada en la faena.']
+  "municipio_id" integer [not null, note: 'Municipio de salida de la faena.']
+  "fecha_salida" timestamp [not null, note: 'Fecha y hora de inicio de la faena.']
+  "fecha_retorno" timestamp [note: 'Fecha y hora de retorno. NULL indica faena en curso.']
+"id" serial [pk, increment, note: 'Identificador de la faena.']  
+
+  Checks {
+    `fecha_retorno is null or fecha_retorno > fecha_salida` [name: 'faena_fechas_ck']
+  }
+  Note: 'Viaje de pesca organizado. Agrupa capturas de un mismo viaje.'
+}
+
+Table "faenas_pescadores" {
+  "faena_id" integer [not null, note: 'Referencia a la faena.']
+  "pescador_id" integer [not null, note: 'Referencia al pescador participante.']
+  Indexes {
+    (faena_id, pescador_id) [pk, name: "faenas_pescadores_pk"]
+  }
+  Note: 'Participación de pescadores en faenas. Resuelve la relación N:M entre faena y pescador.'
+}
+
+Table "vedas" {
+  "id" serial [pk, increment, note: 'identificador de la veda.']
+  "especie_id" integer [not null, note: 'especie sujeta a la veda.']
+  "cuenca_id" integer [note: 'Cuenca donde aplica la veda. null indica veda de alcance nacional.']
+  "fecha_inicio" date [not null, note:"fecha de inicio del período de veda."]
+  "fecha_fin" date [not null, note:"fecha de inicio del período de veda."]  
+  "descripcion" varchar(300) [note: 'motivo o contexto de la veda.']
+
+  Checks {
+    `fecha_fin >= fecha_inicio` [name: 'veda_fechas_ck']
+  }
+  Note: 'Períodos de prohibición de captura por especie, a nivel nacional o por cuenca.'  
+}
+
+Table "auditoria_capturas" {
+    "id" serial [pk, increment, note: 'identificador del evento de auditoría.']
+    "captura_id" integer [not null, note: 'captura afectada por la operación auditada.']
+    "operacion" varchar(10) [not null, note: 'tipo de operación registrada: insert o update.']    
+    "cantidad_kg_anterior" numeric(8,2) [not null, note: 'valor de cantidad_kg antes del cambio. null cuando operacion = insert.']
+    "cantidad_kg_nueva" numeric(8,2) [not null, note: 'valor de cantidad_kg después de la operación.']
+    "modificado_en" timestamp [not null, note: 'fecha y hora en que ocurrió la operación auditada.']
+    "usuario_bd" varchar(100) [not null, note: 'usuario de postgresql que ejecutó la operación (current_user).']    
+
+  Note: 'Historial automático de inserciones y actualizaciones sobre captura.'      
+}
+
+Ref:"departamentos"."id" < "municipios"."departamento_id"
+Ref:"cuencas"."id" < "municipios"."cuenca_id"
+Ref:"especies"."id" < "especies_cuencas"."especie_id"
+Ref:"cuencas"."id" < "especies_cuencas"."cuenca_id"
+Ref:"municipios"."id" < "pescadores"."municipio_id"
+Ref:"pescadores"."id" < "capturas"."pescador_id"
+Ref:"faenas"."id" < "capturas"."faena_id"  
+Ref:"especies"."id" < "capturas"."especie_id"
+Ref:"metodos_pesca"."id" < "capturas"."metodo_id"
+Ref:"tipos_embarcacion"."id" < "embarcaciones"."tipo_embarcacion_id"
+Ref:"municipios"."id" < "embarcaciones"."municipio_id"
+Ref:"embarcaciones"."id" < "faenas"."embarcacion_id"
+Ref:"municipios"."id" < "faenas"."municipio_id"
+Ref:"faenas"."id" < "faenas_pescadores"."faena_id"
+Ref:"pescadores"."id" < "faenas_pescadores"."pescador_id"
+Ref:"especies"."id" < "vedas"."especie_id"
+Ref:"cuencas"."id" < "vedas"."cuenca_id"
+Ref:"capturas"."id" < "auditoria_capturas"."captura_id"

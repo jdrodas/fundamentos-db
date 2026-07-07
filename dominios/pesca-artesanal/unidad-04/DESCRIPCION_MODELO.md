@@ -140,7 +140,7 @@ no trazabilidad de negocio de quién capturó el pez (esa información ya vive e
 | Función | Firma | Retorna | Propósito |
 |---|---|---|---|
 | `f_esta_en_veda` | `(especie_id integer, cuenca_id integer, fecha date)` | `boolean` | Determina si una especie está vedada en una cuenca en una fecha dada |
-| `f_calcular_capacidad_disponible` | `(faena_id integer)` | `numeric` | Kg disponibles antes de alcanzar el límite de carga de la embarcación |
+| `f_calcula_capacidad_disponible` | `(faena_id integer)` | `numeric` | Kg disponibles antes de alcanzar el límite de carga de la embarcación |
 
 ### Funciones de tabla
 
@@ -153,17 +153,16 @@ no trazabilidad de negocio de quién capturó el pez (esa información ya vive e
 
 | Procedimiento | Orquesta | Validaciones antes de actuar |
 |---|---|---|
-| `p_registrar_captura` | `INSERT` en `captura` | Veda vigente, capacidad de carga disponible, pescador pertenece a la faena |
-| `p_actualizar_captura` | `UPDATE` en `captura` | Si cambia `cantidad_kg`: capacidad de carga. Si cambia `especie_id`: veda vigente |
-| `p_eliminar_captura` | `DELETE` en `captura` | Rechaza si la faena ya tiene `fecha_retorno` (faena cerrada) |
-| `p_registrar_participante_faena` | `INSERT` en `faena_pescador` | Capacidad de personas de la embarcación |
+| `p_registra_captura` | `INSERT` en `captura` | Veda vigente, capacidad de carga disponible, pescador pertenece a la faena |
+| `p_actualiza_captura` | `UPDATE` en `captura` | Si cambia `cantidad_kg`: capacidad de carga. Si cambia `especie_id`: veda vigente |
+| `p_elimina_captura` | `DELETE` en `captura` | Rechaza si la faena ya tiene `fecha_retorno` (faena cerrada) |
 
 ### Triggers (auditoría automática)
 
 | Trigger | Evento | Tabla | Acción |
 |---|---|---|---|
-| `t_auditoria_captura_insert` | `AFTER INSERT` | `captura` | Inserta registro en `auditoria_captura` con `operacion = 'INSERT'` |
-| `t_auditoria_captura_update` | `AFTER UPDATE` | `captura` | Inserta registro en `auditoria_captura` con `operacion = 'UPDATE'`, capturando `cantidad_kg` anterior y nueva |
+| `tr_auditoria_captura_insert` | `AFTER INSERT` | `captura` | Inserta registro en `auditoria_captura` con `operacion = 'INSERT'` |
+| `tr_auditoria_captura_update` | `AFTER UPDATE` | `captura` | Inserta registro en `auditoria_captura` con `operacion = 'UPDATE'`, capturando `cantidad_kg` anterior y nueva |
 
 ---
 
@@ -171,7 +170,7 @@ no trazabilidad de negocio de quién capturó el pez (esa información ya vive e
 
 `veda` y `auditoria_capturas` cumplen la Tercera Forma Normal (3FN):
 
-- **veda:** todos los atributos (`fecha_inicio`, `fecha_fin`, `descripcion`)
+- **vedas:** todos los atributos (`fecha_inicio`, `fecha_fin`, `descripcion`)
   dependen directamente de `veda_id`. `especie_id` y `cuenca_id` son
   referencias, no datos derivados de otras columnas.
 - **auditoria_capturas:** todos los atributos describen el evento de auditoría

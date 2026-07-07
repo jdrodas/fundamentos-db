@@ -56,6 +56,10 @@ reglas de negocio, automatizar procesos y garantizar la integridad de los datos.
 | [pesca_artesanal_diagrama_relacional_unidad4.jpg](diagramas/pesca_artesanal_diagrama_relacional_unidad4.jpg) |  diagrama relacional de la unidad |
 | [00_schema_postgreSQL.sql](scripts/00_schema_postgreSQL.sql) |  script de creación de tablas y restricciones |
 | [01_seed_postgreSQL.sql](scripts/01_seed_postgreSQL.sql) |  datos de prueba |
+| [02_functions_postgreSQL.sql](scripts/02_functions_postgreSQL.sql) |  funciones escalares y de tabla |
+| [03_stored_procedures_postgreSQL.sql](scripts/03_stored_procedures_postgreSQL.sql) |  procedimientos con validaciones orquestadas |
+| [04_triggers_postgreSQL.sql](scripts/04_triggers_postgreSQL.sql) |  triggers de auditoría automática |
+
 
 
 ### Glosario rápido
