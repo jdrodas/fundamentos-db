@@ -1,4 +1,4 @@
-# Unidad 1 — Fundamentos y diseño de bases de datos relacionales
+# Unidad 1: Fundamentos y diseño de bases de datos relacionales
 
 ## Dominio de problema
 

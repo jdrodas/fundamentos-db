@@ -1,4 +1,4 @@
-## Unidad 3: SQL avanzado
+# Unidad 3: SQL avanzado
 
 ## Dominio de problema
 

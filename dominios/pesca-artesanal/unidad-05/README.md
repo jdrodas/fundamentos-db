@@ -52,21 +52,19 @@ integridad en entornos de producción.
    en pruebas de transacciones y concurrencia.
 
 
-### Recursos de esta carpeta
+### Recursos de esta carpeta - unidad 5
 
-```
-unit-05-transacciones-y-pruebas/
-├── README.md                  ← este archivo
-├── diagrams/
-│   └── modelo-er.svg          ← diagrama relacional de referencia
-├── scripts/
-│   ├── 00_schema.sql          ← modelo relacional del escenario transaccional
-│   ├── 01_seed.sql            ← datos de prueba representativos del dominio
-│   ├── 02_transactions.sql    ← implementación de transacciones ACID
-│   ├── 03_isolation.sql       ← ejemplos de niveles de aislamiento
-│   └── 04_unit_tests.sql      ← casos de prueba unitaria
-└── data/
-```
+| Recurso | Descripción |
+|---------|-------------|
+| [README.md](README.md) |  Este archivo |
+| [DESCRIPCION_MODELO.md](DESCRIPCION_MODELO.md) |  descripción del dominio del problema |
+| [pesca_artesanal_diagrama_relacional_unidad5.jpg](diagramas/pesca_artesanal_diagrama_relacional_unidad5.jpg) |  diagrama relacional de la unidad |
+| [00_schema_postgreSQL.sql](scripts/00_schema_postgreSQL.sql) |  tabla cuota_especie |
+| [01_seed_postgreSQL.sql](scripts/01_seed_postgreSQL.sql) |  cuotas de prueba |
+| [02_transactions_postgreSQL.sql](scripts/02_transactions_postgreSQL.sql) |  registrar_captura evolucionado, BEGIN/COMMIT/ROLLBACK |
+| [03_isolation_postgreSQL.sql](scripts/03_isolation_postgreSQL.sql) |  instrucciones de reproducción manual en dos sesiones |
+| [04_unit_tests_postgreSQL.sql](scripts/04_unit_tests_postgreSQL.sql) |  casos de prueba unitaria |
+
 
 ### Glosario rápido
 
@@ -76,4 +74,4 @@ unit-05-transacciones-y-pruebas/
 | Nivel de aislamiento | Configuración que determina el grado en que una transacción está protegida de los efectos de otras transacciones concurrentes. |
 | Deadlock | Situación de bloqueo mutuo en que dos o más transacciones se esperan indefinidamente entre sí para liberar recursos. |
 | Lectura fantasma | Problema de concurrencia que ocurre cuando una transacción ejecuta la misma consulta dos veces y obtiene conjuntos de filas diferentes por inserciones o eliminaciones concurrentes. |
-| Prueba unitaria de base de datos | Caso de prueba que verifica el comportamiento esperado de una operación específica —procedimiento, función o transacción— de forma aislada y reproducible. |
+| Prueba unitaria de base de datos | Caso de prueba que verifica el comportamiento esperado de una operación específica (procedimiento, función o transacción) de forma aislada y reproducible. |

@@ -1,5 +1,4 @@
-# Unidad 4 — Lógica almacenada
-
+# Unidad 4: Lógica almacenada
 ## Dominio de problema
 
 Extensión del modelo relacional de pesca artesanal. Esta unidad incorpora la

@@ -1,4 +1,4 @@
-# Unidad 2 — SQL básico y operaciones de manipulación de datos
+# Unidad 2: SQL básico y operaciones de manipulación de datos
 
 ## Dominio de problema
 
