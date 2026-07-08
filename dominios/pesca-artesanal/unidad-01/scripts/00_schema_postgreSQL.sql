@@ -6,7 +6,7 @@
 -- Proyecto: Pesca artesanal en Colombia
 -- Motor de Base de datos: PostgreSQL 15 o superior
 
--- Unidad 1 — Fundamentos y diseño de bases de datos relacionales
+-- Unidad 1: Fundamentos y diseño de bases de datos relacionales
 -- Archivo: 00_schema_postgreSQL.sql
 
 -- Importante:

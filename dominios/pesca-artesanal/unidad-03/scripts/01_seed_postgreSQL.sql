@@ -6,7 +6,7 @@
 -- Proyecto: Pesca artesanal en Colombia
 -- Motor de Base de datos: PostgreSQL 15 o superior
 
--- Unidad 3 — SQL avanzado
+-- Unidad 3: SQL avanzado
 -- Archivo: 01_seed_postgreSQL.sql
 
 -- Importante:

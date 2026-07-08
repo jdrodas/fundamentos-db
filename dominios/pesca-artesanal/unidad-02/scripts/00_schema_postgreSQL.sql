@@ -6,7 +6,7 @@
 -- Proyecto: Pesca artesanal en Colombia
 -- Motor de Base de datos: PostgreSQL 15 o superior
 
--- Unidad 2 — SQL básico y operaciones de manipulación de datos
+-- Unidad 2: Fundamentos de SQL y operaciones básicas
 -- Archivo: 00_schema_postgreSQL.sql
 
 -- Importante:

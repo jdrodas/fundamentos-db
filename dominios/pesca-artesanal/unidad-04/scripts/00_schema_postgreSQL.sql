@@ -35,7 +35,7 @@
 create table vedas (
     id                          serial constraint vedas_pk primary key,
     especie_id                  integer not null constraint veda_especie_fk references especies,
-    cuenca_id                   integer constraint veda_cuenca_fk references especies,
+    cuenca_id                   integer constraint veda_cuenca_fk references cuencas,
     fecha_inicio                date not null,
     fecha_fin                   date not null,
     descripcion                 varchar(300),
