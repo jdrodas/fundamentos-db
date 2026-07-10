@@ -24,7 +24,7 @@ El diagrama completo se encuentra en [`diagramas/pesca_artesanal_diagrama_relaci
 ### Entidades heredadas sin modificaciones estructurales
 
 Todo el modelo de las Unidades 1 a 4: `cuencas`, `departamentos`, `municipios`,
-`especies`, `especies_cuenca`, `metodos_pesca`, `pescadores`, `capturas`,
+`especies`, `especiess_cuencas`, `metodos_pesca`, `pescadores`, `capturas`,
 `tipos_embarcacion`, `embarcaciones`, `faenas`, `faenas_pescadores`, `vedas`,
 `auditoria_capturas`.
 
@@ -53,7 +53,7 @@ período determinado, a nivel nacional o restringido a una cuenca.
 
 A diferencia del resto del modelo, que evita atributos derivados almacenados
 en favor de calcularlos mediante consultas (por ejemplo, el total capturado
-por faena nunca se almacena; se calcula con `SUM` sobre `capturas`), `kg_restante`
+por faena nunca se almacena; se calcula con `SUM` sobre `captura`), `kg_restante`
 sí se almacena físicamente y se decrementa activamente cada vez que se registra
 una captura que aplica a esa cuota.
 
@@ -72,30 +72,30 @@ genuina, no exclusiva de este ejercicio académico.
 
 ### 2. Relación entre cuotas_especies y capturas: coincidencia computada, no FK
 
-`cuotas_especies` no tiene una clave foránea hacia `capturas`, siguiendo el mismo
-patrón ya usado en `vedas` (Unidad 4). Una captura "afecta" una cuota cuando
+`cuotas_especies` no tiene una clave foránea hacia `captura`, siguiendo el mismo
+patrón ya usado en `vedas` visto en la Unidad 4. Una captura "afecta" una cuota cuando
 coinciden tres condiciones simultáneamente:
 
 1. `capturas.especie_id` = `cuotas_especies.especie_id`
-2. La fecha de la captura cae dentro de `[periodo_inicio, periodo_fin]`
-3. La cuenca de la captura (obtenida vía `capturas → faenas → municipios → cuencas`)
+2. La fecha de la captura cae dentro de `[periodo_inicio, periodo_fin]` de la cuota.
+3. La cuenca de la captura (obtenida vía `captura → faena → municipio → cuenca`)
    coincide con `cuotas_especies.cuenca_id`, o la cuota es nacional (`cuenca_id IS NULL`)
 
-Esta es la misma lógica de coincidencia implementada en `f_esta_en_veda`
-(Unidad 4), aplicada ahora a cuotas en lugar de vedas.
+Esta es la misma lógica de coincidencia implementada en la función `f_esta_en_veda`
+de la Unidad 4, aplicada ahora a cuotas en lugar de vedas.
 
-### 3. Evolución de registrar_captura en lugar de un procedimiento nuevo
+### 3. Evolución de p_registra_captura en lugar de un procedimiento nuevo
 
-El procedimiento `p_registrar_captura` se modifica directamente en esta unidad,
+El procedimiento `p_registra_captura` se modifica directamente en esta unidad,
 en lugar de crear un procedimiento paralelo. Esta decisión refleja el mismo
 principio de evolución aplicado al modelo estructural a lo largo del curso
-(como la refactorización de `capturas` en la Unidad 3): la lógica almacenada
+(como la refactorización de `captura` en la Unidad 3): la lógica almacenada
 evoluciona junto con los requerimientos del dominio, no se acumula en
 versiones paralelas.
 
 **Antes (Unidad 4):**
 
-`p_registrar_captura` validaba, en orden: existencia de la faena, participación
+`p_registra_captura` validaba, en orden: existencia de la faena, participación
 del pescador en la faena, veda vigente, capacidad de carga disponible de la
 embarcación. Luego insertaba la captura.
 
@@ -111,12 +111,12 @@ detalle de por qué este bloqueo es necesario.
 
 | Validación | Unidad 4 | Unidad 5 |
 |---|---|---|
-| Faena existe | ✅ | ✅ |
-| Pescador pertenece a la faena | ✅ | ✅ |
-| Especie no está en veda | ✅ | ✅ |
-| Capacidad de carga disponible | ✅ | ✅ |
-| Cuota disponible (con bloqueo `FOR UPDATE`) | — | ✅ nuevo |
-| Descuento de `kg_restante` tras el INSERT | — | ✅ nuevo |
+| Faena existe | Si | Si |
+| Pescador pertenece a la faena | Si | Si |
+| Especie no está en veda | Si | Si |
+| Capacidad de carga disponible | Si | Si |
+| Cuota disponible (con bloqueo `FOR UPDATE`) |  | nueva |
+| Descuento de `kg_restante` tras el INSERT |  | nueva |
 
 ### 4. cuenca_id en cuotas_especies: mismo patrón que veda
 
@@ -132,16 +132,16 @@ de varias cuencas: es nacional o es de una cuenca puntual.
 sentido. `kg_restante >= 0` es la restricción más importante de la tabla:
 impide que el saldo quede negativo por cualquier vía, incluyendo errores en
 la lógica de descuento. Esta restricción actúa como una segunda línea de
-defensa además de la validación explícita en `registrar_captura`: incluso si
-el procedimiento tuviera un error, la base de datos rechazaría el `UPDATE`
-que dejara `kg_restante` en negativo.
+defensa además de la validación explícita en el procedimiento
+`p_registra_captura`; incluso si el procedimiento tuviera un error, 
+la base de datos rechazaría el `UPDATE` que dejara `kg_restante` en negativo.
 
 ### 6. Normalización
 
 `cuotas_especies` cumple la Tercera Forma Normal (3FN) con la excepción
 consciente y documentada de `kg_restante`, que es un valor derivado
 almacenado por las razones expuestas en la decisión 1. Todos los demás
-atributos dependen directamente de `cuota_id` sin dependencias transitivas.
+atributos dependen directamente de `id` sin dependencias transitivas.
 
 ---
 
@@ -157,28 +157,17 @@ atributos dependen directamente de `cuota_id` sin dependencias transitivas.
   la base de datos nunca queda en un estado que viole la regla de negocio
   fundamental de la cuota, incluso ante errores de la lógica de aplicación.
 - **Aislamiento:** `SELECT ... FOR UPDATE` bloquea la fila de `cuota_especie`
-  durante la transacción, impidiendo que una segunda transacción concurrente
-  lea el mismo valor de `kg_restante` antes de que la primera confirme su
-  descuento. Ver el escenario de reproducción manual más abajo.
+  en el momento de la lectura, antes de cualquier `INSERT`, adelantando el
+  rechazo de una captura sin cuota suficiente a un punto temprano del
+  procedimiento y con un mensaje de negocio claro. Sin este bloqueo
+  explícito, PostgreSQL igual serializa los `UPDATE` concurrentes sobre la
+  misma fila y la restricción `CHECK (kg_restante >= 0)` seguiría evitando
+  la corrupción del dato, pero el rechazo ocurriría más tarde y con un
+  mensaje de error genérico. Ver la sección siguiente para el detalle
+  completo de esta distinción.
 - **Durabilidad:** una vez que `COMMIT` se confirma, el descuento de cuota
   persiste incluso ante una falla del sistema inmediatamente después.
 
-### El problema de concurrencia sin bloqueo
-
-Sin `SELECT ... FOR UPDATE`, dos transacciones concurrentes podrían:
-
-1. Transacción A lee `kg_restante = 10` (cuota suficiente para su captura de 8 kg).
-2. Transacción B lee `kg_restante = 10` (cuota suficiente para su captura de 8 kg).
-3. Transacción A inserta su captura y actualiza `kg_restante = 2`. `COMMIT`.
-4. Transacción B, que todavía tiene en memoria `kg_restante = 10` de su
-   lectura inicial, inserta su captura y actualiza `kg_restante = 2` también
-   (en lugar de `-6`, que sería el valor correcto y que la restricción CHECK
-   habría rechazado).
-
-El resultado neto es que se autorizaron 16 kg contra una cuota de 10,
-violando la regla de negocio sin que ninguna restricción declarativa lo
-haya detectado, porque cada `UPDATE` individual parecía válido en el momento
-en que se ejecutó.
 
 ### Reproducción manual del escenario en dos sesiones psql
 
@@ -209,12 +198,11 @@ Ver `03_isolation_postgreSQL.sql` para el procedimiento paso a paso, que incluye
 | Cuota insuficiente | Captura supera `kg_restante` disponible | `ROLLBACK` implícito vía `RAISE EXCEPTION`, `kg_restante` sin cambios |
 | Veda vigente | Captura de especie en veda (reutiliza validación de U4) | Rechazada, `kg_restante` sin cambios |
 | Especie fuera de cuenca | Captura de especie sin distribución en la cuenca de la faena | Rechazada por integridad del dominio, `kg_restante` sin cambios |
-| Concurrencia | Dos sesiones descuentan la misma cuota simultáneamente | Con `FOR UPDATE`: la segunda sesión espera; sin él: se demuestra el problema descrito arriba |
+| Concurrencia | Dos sesiones intentan descontar la misma cuota simultáneamente | Ambas variantes (con y sin `FOR UPDATE`) terminan rechazando la segunda operación; difieren en el momento del rechazo y en si el mensaje es de negocio o un error de restricción genérico |
 
 Ver `04_unit_tests_postgreSQL.sql` para la implementación de cada caso, incluyendo
 verificación explícita del estado de `kg_restante` antes y después de cada
 prueba.
-
 ---
 
 ## Glosario
