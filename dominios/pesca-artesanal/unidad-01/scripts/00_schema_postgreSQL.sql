@@ -113,7 +113,7 @@ grant usage on schema information_schema to pesca_usr;
 -- Creación de Tablas
 -- ****************************************
 
--- Con el usuario pesca_app
+-- Con el usuario pesca_usr
 
 -- 1. cuencas
 create table cuencas (
